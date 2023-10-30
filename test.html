@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* CSS to hide items by default */
+        .item {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="searchInput" placeholder="Search...">
+    <ul id="itemList">
+        <li class="item" data-name="Apple" data-description="A fruit">Apple (A fruit)</li>
+        <li class="item" data-name="Banana" data-description="Yellow fruit">Banana (Yellow fruit)</li>
+        <li class="item" data-name="Carrot" data-description="Orange vegetable">Carrot (Orange vegetable)</li>
+        <li class="item" data-name="Dog" data-description="A pet">Dog (A pet)</li>
+    </ul>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const itemList = document.getElementById('itemList');
+
+        // Add event listener for the search input
+        searchInput.addEventListener('input', () => {
+            const searchQuery = searchInput.value.toLowerCase();
+            const items = itemList.querySelectorAll('.item');
+
+            items.forEach(item => {
+                const itemName = item.getAttribute('data-name').toLowerCase();
+                const itemDescription = item.getAttribute('data-description').toLowerCase();
+
+                // Check if the searchQuery exists in either the name or description
+                if (itemName.includes(searchQuery) || itemDescription.includes(searchQuery)) {
+                    item.style.display = 'block'; // Display the matching item
+                } else {
+                    item.style.display = 'none'; // Hide non-matching items
+                }
+            });
+        });
+    </script>
+</body>
+</html>
